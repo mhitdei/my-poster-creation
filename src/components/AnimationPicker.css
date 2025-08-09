@@ -1,0 +1,45 @@
+/* src/components/AnimationPicker.css */
+
+.animation-picker {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--container-bg);
+    padding: 0.75rem 1rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 20;
+}
+
+.animation-picker p {
+    color: var(--secondary-text);
+    margin: 0;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.animation-options {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.anim-btn {
+    background: transparent;
+    border: 2px solid var(--secondary-text);
+    color: var(--secondary-text);
+    padding: 8px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.anim-btn.active,
+.anim-btn:hover {
+    border-color: var(--border-glow-1);
+    color: var(--primary-text);
+    background-color: var(--shadow-color);
+}

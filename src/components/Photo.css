@@ -1,0 +1,166 @@
+/* src/components/Photo.css */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 17, 23, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: var(--container-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 2px solid var(--border-glow-1);
+    width: 90%;
+    max-width: 700px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+    color: var(--secondary-text);
+    margin-bottom: 1.5rem;
+}
+
+.file-input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 2px dashed var(--secondary-text);
+    border-radius: 10px;
+    color: var(--primary-text);
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.image-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.preview-image {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--secondary-text);
+    color: var(--secondary-text);
+    /* ... other btn styles from App.css ... */
+    border-radius: 50px;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+    border-color: var(--primary-text);
+    color: var(--primary-text);
+}
+
+/* Styles for displaying photos on the canvas */
+.photo-slide-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.photo-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+/* Add these new animation styles to the bottom of src/components/Photo.css */
+
+/* --- Simple Animations --- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+
+.animation-fade .photo-wrapper img { animation: fadeIn 1s ease-out both; }
+.animation-slide-in .photo-wrapper img { animation: slideIn 0.8s ease-out both; }
+.animation-zoom-in .photo-wrapper img { animation: zoomIn 0.8s ease-out both; }
+
+/* Stagger the animations for a nicer effect */
+.animation-slide-in .photo-wrapper,
+.animation-zoom-in .photo-wrapper {
+  animation-delay: calc(var(--i) * 100ms);
+}
+
+
+/* --- Complex "Revolve" Animation --- */
+.animation-revolve {
+    position: relative; /* Needed for absolute positioning of children */
+}
+.animation-revolve .photo-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 35%; /* Smaller size for revolving */
+    height: 35%;
+    transform-origin: center center;
+    animation: revolve 12s linear infinite;
+    animation-delay: calc(var(--i) * -2s); /* Offset each photo's animation */
+}
+@keyframes revolve {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0deg) translateX(120%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(120%) rotate(-360deg); }
+}
+/* Add this to EditorScreen.css */
+.delete-btn {
+    background: none;
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+.delete-btn:hover {
+    background-color: #ff4d4d;
+    color: var(--white);
+}
